@@ -3,8 +3,6 @@
 namespace Codeplx\LaravelCodeplxSupport\Services;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class CodeplxSupportAPIService
 {
@@ -32,7 +30,9 @@ class CodeplxSupportAPIService
             'headers' => [
                 'User-Agent' => $this->agent,
                 'Accept' => 'application/json',
-                'X-API-KEY' => $this->api_key,
+                'Authorization' => 'Bearer ' . $this->api_key,
+                'X-Debug-Data' => json_encode($this->debug_data),
+                'X-App' => config('app.url'),
             ],
         ]);
     }
@@ -42,6 +42,11 @@ class CodeplxSupportAPIService
         try {
             // Get the statuses from the API
             $response = $this->sendRequest('GET', 'api/config/categories');
+
+            // // Check if the response is an error
+            // if (isset($response)) {
+            //     throw new \Exception('Error: API error.');
+            // }
 
             // Return the response as an object
             return json_decode($response->getBody()->getContents());
