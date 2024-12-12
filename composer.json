@@ -1,0 +1,26 @@
+{
+    "name": "codeplx/laravel-codeplx-support",
+    "description": "A support package that submits a ticket to codeplx",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Codeplx\\LaravelCodeplxSupport\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Codeplx\\LaravelCodeplxSupport\\CodeplxSupportServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Dan Roizer",
+            "email": "Danny159@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
