@@ -15,6 +15,11 @@ class CodeplxSupportServiceProvider extends ServiceProvider
         if (! env('CODEPLX_API_KEY')) {
             throw new \Exception('Please add CODEPLX_API_KEY to your .env file');
         }
+
+        // Ensure CODEPLX_ENDPOINT is in the .env file
+        if (! env('CODEPLX_ENDPOINT')) {
+            throw new \Exception('Please add CODEPLX_ENDPOINT to your .env file');
+        }
     }
 
     /**
@@ -23,14 +28,19 @@ class CodeplxSupportServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Load the routes
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
         // Load the views
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'codeplx-support');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'codeplx-support');
 
         // Publish the routes
         $this->publishes([
-            __DIR__.'/routes/web.php' => base_path('routes/codeplx-support.php'),
+            __DIR__.'/../routes/web.php' => base_path('routes/codeplx-support.php'),
         ], 'codeplx-support-routes');
+
+        // Publish the config
+        $this->publishes([
+            __DIR__.'/../config/codeplx.php' => config_path('codeplx.php'),
+        ], 'codeplx-support-config');
     }
 }

@@ -16,8 +16,15 @@ class CodeplxSupportController extends Controller
      */
     public function index()
     {
+        $categories = (new CodeplxSupportAPIService())->getCategories();
+
+        // Check if the response has an error
+        if(isset($categories->error)) {
+            return abort(500, $categories->error);
+        }
+
         return view('codeplx-support::index', [
-            'categories' => json_decode((new CodeplxSupportAPIService())->getStatuses()),
+            'categories' => $categories,
         ]);
     }
 

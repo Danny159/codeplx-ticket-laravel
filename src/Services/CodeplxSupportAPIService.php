@@ -10,14 +10,15 @@ class CodeplxSupportAPIService
 {
     protected $client;
     public $agent = 'Codeplx Laravel API Client';
-    public $endpoint = 'https://support.test/api';
+    public $endpoint;
     public $api_key;
     public $debug_data;
     public $cache_name = 'codeplx-support-api-categories';
 
     public function __construct()
     {
-        $this->api_key = env('CODEPLX_API_KEY');
+        $this->endpoint = config('codeplx.endpoint');
+        $this->api_key = config('codeplx.api_key');
         $this->debug_data = [
             'app' => config('app.name'),
             'version' => config('app.version'),
@@ -36,28 +37,19 @@ class CodeplxSupportAPIService
         ]);
     }
 
-    public function getStatuses()
+    public function getCategories()
     {
-        //Cache::forget($this->cache_name);
+        try {
+            // Get the statuses from the API
+            $response = $this->sendRequest('GET', 'api/config/categories');
 
-        // Check if cache exists
-        if (Cache::has($this->cache_name)) {
-            return Cache::get($this->cache_name);
+            // Return the response as an object
+            return json_decode($response->getBody()->getContents());
+        } catch (\Exception $e) {
+            return (object) [
+                'error' => $e->getMessage(),
+            ];
         }
-
-        // Get the data
-        $response = $this->client->get('api/config/categories');
-
-        // Check if the response is successful
-        if ($response->getStatusCode() !== 200) {
-            return $response->getBody()->getContents();
-        }
-
-        // Cache the data
-        Cache::put($this->cache_name, $response->getBody()->getContents(), 1440);
-
-        // Return the data
-        return $response->getBody()->getContents();
     }
 
     public function sendRequest($method, $uri, $data = [])
