@@ -15,11 +15,6 @@ class CodeplxSupportServiceProvider extends ServiceProvider
         if (! env('CODEPLX_API_KEY')) {
             throw new \Exception('Please add CODEPLX_API_KEY to your .env file');
         }
-
-        // Ensure CODEPLX_ENDPOINT is in the .env file
-        if (! env('CODEPLX_ENDPOINT')) {
-            throw new \Exception('Please add CODEPLX_ENDPOINT to your .env file');
-        }
     }
 
     /**
