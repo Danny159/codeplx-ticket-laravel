@@ -20,7 +20,7 @@ class CodeplxSupportController extends Controller
 
         // Check if the response has an error
         if(isset($categories->error)) {
-            return abort(500, $categories->error);
+            return response()->json([$categories], 401);
         }
 
         return view('codeplx-support::index', [

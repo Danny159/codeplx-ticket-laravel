@@ -41,22 +41,16 @@ class CodeplxSupportAPIService
 
     public function getCategories()
     {
-        try {
-            // Get the statuses from the API
-            $response = $this->sendRequest('GET', 'api/config/categories');
+        // Get the statuses from the API
+        $response = $this->sendRequest('GET', 'api/config/categories');
 
-            // // Check if the response is an error
-            // if (isset($response)) {
-            //     throw new \Exception('Error: API error.');
-            // }
-
-            // Return the response as an object
-            return json_decode($response->getBody()->getContents());
-        } catch (\Exception $e) {
-            return (object) [
-                'error' => $e->getMessage(),
-            ];
+        // Check if the response has an error
+        if(isset($response->error)) {
+            return $response;
         }
+
+        // Return the response as an object
+        return json_decode($response->getBody()->getContents());
     }
 
     public function sendRequest($method, $uri, $data = [])
