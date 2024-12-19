@@ -22,6 +22,8 @@ class CodeplxSupportAPIService
             'version' => config('app.version'),
             'env' => config('app.env'),
             'url' => config('app.url'),
+            'laravel' => app()->version(),
+            'codeplx_version' => config('codeplx.version'),
         ];
 
         $this->client = new Client([
