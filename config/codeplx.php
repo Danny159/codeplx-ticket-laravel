@@ -1,7 +1,7 @@
 <?php
 return [
     // Version
-    'version' => '1.0.1',
+    'version' => '1.0.2',
 
     // The API key for the Codeplx Support API
     'api_key' => env('CODEPLX_API_KEY'),
