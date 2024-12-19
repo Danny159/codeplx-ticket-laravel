@@ -7,5 +7,5 @@ return [
     'api_key' => env('CODEPLX_API_KEY'),
 
     // The endpoint for the Codeplx Support API
-    'endpoint' => env('CODEPLX_ENDPOINT', 'https://support.codeplx.com/'),
+    'endpoint' => env('CODEPLX_ENDPOINT', 'https://support.codeplx.com'),
 ];
