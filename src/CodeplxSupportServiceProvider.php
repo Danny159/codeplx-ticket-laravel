@@ -2,6 +2,7 @@
 
 namespace Codeplx\LaravelCodeplxSupport;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class CodeplxSupportServiceProvider extends ServiceProvider
@@ -13,7 +14,7 @@ class CodeplxSupportServiceProvider extends ServiceProvider
     {
         // Ensure CODEPLX_API_KEY is in the .env file
         if (! env('CODEPLX_API_KEY')) {
-            throw new \Exception('Please add CODEPLX_API_KEY to your .env file');
+            Log::error('CODEPLX_API_KEY is not set in the .env file');
         }
     }
 
