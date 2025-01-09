@@ -15,7 +15,7 @@ class CodeplxSupportAPIService
 
     public function __construct()
     {
-        $this->endpoint = config('codeplx.endpoint');
+        $this->endpoint = 'https://support.codeplx.com/';
         $this->api_key = config('codeplx.api_key');
         $this->debug_data = [
             'app' => config('app.name'),
