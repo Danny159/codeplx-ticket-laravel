@@ -14,7 +14,7 @@ class CodeplxSupportServiceProvider extends ServiceProvider
     {
         // Ensure CODEPLX_API_KEY is in the .env file
         if (! env('CODEPLX_API_KEY')) {
-            Log::error('CODEPLX_API_KEY is not set in the .env file');
+            //Log::error('CODEPLX_API_KEY is not set in the .env file');
         }
     }
 
